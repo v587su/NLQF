@@ -1,0 +1,9 @@
+build/
+.history/
+.vscode/
+.DS_Store
+__pycache__
+dist/
+*.egg-info
+*.pyc
+test.py
