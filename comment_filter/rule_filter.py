@@ -2,15 +2,15 @@ import re
 
 
 def contain_any_url(s): 
-    return re.search(r'://',s)
+    return bool(re.search(r'://',s))
 
 
 def contain_any_javadoc_tag(s): 
-    return re.search(r'@[a-zA-Z0-9]+',s)
+    return bool(re.search(r'@[a-zA-Z0-9]+',s))
     
 
 def contain_any_non_English(s): 
-    return re.search(r'[^\x00-\xff]',s)
+    return bool(re.search(r'[^\x00-\xff]',s))
 
 
 def not_contain_any_letter(s): 
@@ -31,7 +31,7 @@ def end_with_question_mark(s):
     return s[-1] == '?'
 
 def contain_html_tag(s): 
-    return re.search(r'</?[^>]+>', s)
+    return bool(re.search(r'</?[^>]+>', s))
     
 def remove_brackets(s):
     return re.sub(r'\([^\)]*\)','',s)
@@ -54,12 +54,15 @@ rule2fuc = {
 
 
 def rule_filter(comments,rule_set=[],rule_dic={}):
-    if not isinstance(comments,list):
-        raise TypeError
-    
+    if not isinstance(comments, list):
+        raise TypeError('comments must be a list')
+
     new_comments = []
     indexs = []
     rule2fuc.update(rule_dic)
+
+    if len(rule_set) < 1:
+        rule_set = rule2fuc.keys()
 
     for i,c in enumerate(comments):
         for rule in rule_set:
@@ -68,8 +71,9 @@ def rule_filter(comments,rule_set=[],rule_dic={}):
 
         flag = False
         for rule in rule_set:
-            if not rule.startswith('remove'):
-                flag = rule2fuc[rule](c)
+            if not rule.startswith('remove') and rule2fuc[rule](c):
+                flag = True
+                break
 
         if not flag:
             new_comments.append(c)

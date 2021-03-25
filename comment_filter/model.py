@@ -80,20 +80,17 @@ class DecoderRNN(nn.Module):
         self.SOS = 1
         self.cuda = cuda
         self.embed = nn.Embedding(output_size, input_size)
-        # self.embed = nn.Embedding(output_size, hidden_size)
         self.dropout = nn.Dropout(dropout_p)
         self.output_size = output_size
         self.n_layers = n_layers
         self.rnn_cell = MultiLayerGRUCell(
             input_size=input_size,
             hidden_size=input_size,
-            # hidden_size=hidden_size,
             num_layers=n_layers,
             dropout=dropout_p
         )
         self.output_projection = nn.Sequential(
             nn.Linear(input_size, hidden_size),
-            # nn.Linear(hidden_size, hidden_size),
             nn.Tanh(),
             nn.Linear(hidden_size, input_size)
         )
@@ -116,17 +113,6 @@ class DecoderRNN(nn.Module):
                 input = input.argmax(dim=1)
         logit = torch.stack(logit, dim=1)
         return logit
-
-    # def sample(self, hidden, trg):
-    #     max_len = trg.size(1)
-    #     hidden = hidden.unsqueeze(0).repeat(self.n_layers,1,1)
-    #     logit = []
-    #     for i in range(max_len):
-    #         hidden, token_logit = self.step(hidden, input)
-    #         input = token_logit.argmax(dim=1)
-    #         logit.append(token_logit)
-    #     logit = torch.stack(logit, dim=1)
-    #     return logit
 
 
 

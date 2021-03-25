@@ -80,14 +80,15 @@ def _compute_loss(opt, model, data_loader, vocab_size, device):
     return np.array(loss_values)
 
 
-def model_filter(comments, vocab_path='comment_filter/data/word_vocab.json', model_path='comment_filter/data/vae.model', options={}):
+def model_filter(comments, word_vocab, model, options={}):
     if not isinstance(comments, list):
-        raise TypeError
+        raise TypeError('comments must be a list')
+    
+    if len(comments) < 2:
+        raise ValueError('The length of comments must be greater than 1')
 
     default_options.update(options)
 
-    with open(vocab_path, 'r') as f:
-        word_vocab = json.load(f)
     vocab_size = len(word_vocab)
 
     corpus = QueryDataset(comments, word_vocab,
@@ -95,7 +96,6 @@ def model_filter(comments, vocab_path='comment_filter/data/word_vocab.json', mod
     data_loader = torch.utils.data.DataLoader(
         dataset=corpus, batch_size=1, shuffle=False, num_workers=default_options['num_workers'])
 
-    model = torch.load(model_path)
     model.eval()
     device = torch.device("cuda:0" if default_options['with_cuda'] else "cpu")
     model = model.to(device)
