@@ -1,5 +1,5 @@
 # Code for "On the importance of Building High-quality Training Datasets for Neural Code Search"
-This repo contains the source code and dataset introduced in our paper.
+This repo contains the source code introduced in our paper.
 
 ## Tool: Natural Language Query Filter (NLQF)
 
@@ -27,17 +27,28 @@ model = torch.load(model_path)
 
 raw_comments = ['======','create a remote conection','return @test','convert int to string']
 
-comments,idx = nlqf.rule_filter(raw_comments)
+# Modify this list to config your ruleset.
+rule_list = ['contain_any_url','contain_any_javadoc_tag', 'contain_any_non_English','not_contain_any_letter', 'less_than_three_words', 'end_with_question_mark', 'contain_html_tag', 'remove_brackets', 'remove_html_tag']
+
+# Define your own rule. Return False if you want to remove the comment_str. Return String if you want to modify the comment_str.
+def my_rule(comment_str):
+    return len(comment_str) < 10
+
+# If the key starts with 'remove', the comment will be modified. 
+my_rule_dict = {
+    'length_less_than_10':my_rule
+}
+
+
+comments,idx = nlqf.rule_filter(raw_comments,rule_set=rule_list+list(my_rule_dict.keys()),rule_dict=my_rule_dict)
 print(comments,idx)
 # ['create a remote conection', 'convert int to string'] [1, 3]
 
-comments,idx = nlqf.model_filter(raw_comments, word_vocab, model)
+comments,idx = nlqf.model_filter(raw_comments, word_vocab, model, with_cuda=True, query_len=20,num_workers=1, max_iter=1000, dividing_proportion=0)
 print(comments,idx)
 # ['create a remote conection', 'convert int to string'] [1 3]
 ```
 
 ### VAE Model 
-To train the filtering model with your own real query corpus, you can refer to [this repository](https://github.com/v587su/VAE_public).
+To train the filtering model with your own real query corpus, you can refer to the source code of VAE model on our website.
 
-## Dataset: Codebase with Filtered Comments (COFIC)
-This dataset can be downloaded at [GoogleDrive](https://drive.google.com/file/d/1GILk46cxKx64EEBNVyswEjHaLHuF5V_x/view?usp=sharing) or [BaiduNetdisk](https://pan.baidu.com/s/1oKhEpo1r5XmAoKiZygxI0Q) (code: es5f).

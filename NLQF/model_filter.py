@@ -11,12 +11,7 @@ from sklearn.mixture import GaussianMixture
 from nltk.stem import WordNetLemmatizer 
 from model import *
 
-default_options = {
-    'with_cuda': True,
-    'query_len': 20,
-    'num_workers': 1,
-    'max_iter':1000
-}
+
 
 
 class QueryDataset(Dataset):
@@ -58,7 +53,7 @@ class QueryDataset(Dataset):
         return torch.tensor(self.query[item]),torch.tensor(self.query[item])
 
 
-def _compute_loss(opt, model, data_loader, vocab_size, device):
+def _compute_loss(model, data_loader, vocab_size, device, with_cuda):
     loss_values = []
     decoded = []
 
@@ -68,7 +63,7 @@ def _compute_loss(opt, model, data_loader, vocab_size, device):
 
     loss = nn.CrossEntropyLoss(weight=loss_weight)
     for data, target in tqdm.tqdm(data_loader):
-        if opt['with_cuda']:
+        if with_cuda:
             torch.cuda.empty_cache()
         with torch.no_grad():
             data = data.to(device)
@@ -80,37 +75,36 @@ def _compute_loss(opt, model, data_loader, vocab_size, device):
     return np.array(loss_values)
 
 
-def model_filter(comments, word_vocab, model, options={}):
+def model_filter(comments, word_vocab, model, with_cuda=True, query_len=20,num_workers=1,max_iter=1000,dividing_proportion=0):
     if not isinstance(comments, list):
         raise TypeError('comments must be a list')
     
     if len(comments) < 2:
         raise ValueError('The length of comments must be greater than 1')
 
-    default_options.update(options)
-
     vocab_size = len(word_vocab)
-
-    corpus = QueryDataset(comments, word_vocab,
-                          default_options['query_len'], is_docstring=True)
+    corpus = QueryDataset(comments, word_vocab, query_len, is_docstring=True)
     data_loader = torch.utils.data.DataLoader(
-        dataset=corpus, batch_size=1, shuffle=False, num_workers=default_options['num_workers'])
+        dataset=corpus, batch_size=1, shuffle=False, num_workers=num_workers)
 
     model.eval()
-    device = torch.device("cuda:0" if default_options['with_cuda'] else "cpu")
+    device = torch.device("cuda:0" if with_cuda else "cpu")
     model = model.to(device)
 
-    losses = _compute_loss(default_options, model,
-                           data_loader, vocab_size, device)
+    losses = _compute_loss(model,data_loader, vocab_size, device, with_cuda)
     idx = np.argsort(losses)
     losses = np.array(losses)[idx].reshape(-1, 1)
 
-    gmm = GaussianMixture(
-        n_components=2, covariance_type='full', max_iter=default_options['max_iter']).fit(losses)
-    predicted = gmm.predict(losses)
-    return_type = predicted[np.argmin(losses)]
-    idx_new = idx[predicted == return_type]
-    idx_new.sort()
+    if dividing_proportion > 0:
+        idx_new = idx[:int(len(idx)*dividing_proportion)]
+        filtered_comments = [comments[i] for i in idx_new]
+    else:
+        gmm = GaussianMixture(
+            n_components=2, covariance_type='full', max_iter=max_iter).fit(losses)
+        predicted = gmm.predict(losses)
+        return_type = predicted[np.argmin(losses)]
+        idx_new = idx[predicted == return_type]
+        idx_new.sort()
+        filtered_comments = [comments[i] for i in idx_new]
 
-    filtered_comments = [comments[i] for i in idx_new]
     return filtered_comments, idx_new
