@@ -12,8 +12,7 @@ pip install NLQF
 ```
 
 ### Usage
-*NOTE: To use this tool, you need to download the [pre-trained model](https://github.com/v587su/comment-filter/blob/master/resource/vae.model) and the [word vocabulary](https://github.com/v587su/comment-filter/blob/master/resource/word_vocab.json).*
-
+NOTE: To use this tool, you need to prepare the pre-trained model and the word vocabulary in ./resource
 ```
 import nlqf
 import torch 
