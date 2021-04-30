@@ -6,10 +6,7 @@ This repo contains the source code introduced in our paper.
 NLQF is a tool to filter query-appropriate text for building high-quality code search datasets. It consists of rule-based filering and model-based filtering.
 
 ### Installation
-
-```
-pip install NLQF
-```
+To confirm the double-blind policy, we do not provide pip installation. You can directly call the functions in our source code to use this tool.
 
 ### Usage
 NOTE: To use this tool, you need to prepare the pre-trained model and the word vocabulary in ./resource
