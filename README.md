@@ -1,5 +1,5 @@
 # Code for "On the importance of Building High-quality Training Datasets for Neural Code Search"
-This repo contains the source code introduced in our paper.
+This repo contains the source code introduced in our paper. The COFIC dataset can be downloaded [here](https://drive.google.com/file/d/1Ai0WMYrIGQQLqBC180mzUVDSbpkgO6uD/view?usp=sharing).
 
 ## Natural Language Query Filter (NLQF)
 
