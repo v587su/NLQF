@@ -56,5 +56,5 @@ print(comments,idx)
 ```
 
 ### VAE Model 
-To train the filtering model with your own query corpus, you can refer to the source code for training the VAE model.
+To train the filtering model with your own query corpus, you can refer to [this repo](https://github.com/v587su/VAE_public) to train your own VAE model.
 
