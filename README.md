@@ -1,15 +1,25 @@
 # Code for "On the importance of Building High-quality Training Datasets for Neural Code Search"
 This repo contains the source code introduced in our paper.
 
-## Tool: Natural Language Query Filter (NLQF)
+## Natural Language Query Filter (NLQF)
 
-NLQF is a tool to filter query-appropriate text for building high-quality code search datasets. It consists of rule-based filering and model-based filtering.
+``NLQF`` is a tool to filter query-appropriate text for building high-quality code search datasets. It consists of rule-based filering and model-based filtering.
 
 ### Installation
-To confirm the double-blind policy, we do not provide pip installation. You can directly call the functions in our source code to use this tool.
-
+You can install ``NLQF`` by running the following command:
+```
+pip install nlqf
+```
+The dependencies of ``NLQF`` are:
+```
+sklearn
+nltk
+numpy
+pytorch
+```
 ### Usage
-NOTE: To use this tool, you need to prepare the pre-trained model and the word vocabulary in ./resource
+Before the usage, you need to download the pre-trained model ``./resource/vae.model`` and the word vocabulary ``./resource/word_vocab.json``.
+Here is the example script to use ``nlqf``:
 ```
 import nlqf
 import torch 
@@ -46,5 +56,5 @@ print(comments,idx)
 ```
 
 ### VAE Model 
-To train the filtering model with your own real query corpus, you can refer to the source code of VAE model on our website.
+To train the filtering model with your own query corpus, you can refer to the source code for training the VAE model.
 

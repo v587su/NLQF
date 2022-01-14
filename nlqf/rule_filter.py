@@ -53,13 +53,13 @@ rule2fuc = {
 }
 
 
-def rule_filter(comments,rule_set=[],rule_dic={}):
+def rule_filter(comments,rule_set=[],rule_dict={}):
     if not isinstance(comments, list):
         raise TypeError('comments must be a list')
 
     new_comments = []
     indexs = []
-    rule2fuc.update(rule_dic)
+    rule2fuc.update(rule_dict)
 
     if len(rule_set) < 1:
         rule_set = rule2fuc.keys()

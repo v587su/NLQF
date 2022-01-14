@@ -8,9 +8,10 @@ import os
 sys.path.append(os.path.dirname(__file__))
 from torch.utils.data import Dataset
 from sklearn.mixture import GaussianMixture
+import nltk
+nltk.download('wordnet')
 from nltk.stem import WordNetLemmatizer 
 from model import *
-
 
 
 

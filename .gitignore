@@ -6,4 +6,6 @@ __pycache__
 dist/
 *.egg-info
 *.pyc
-test.py
+test*
+*.slurm
+slurm*
