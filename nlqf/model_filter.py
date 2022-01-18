@@ -76,7 +76,7 @@ def _compute_loss(model, data_loader, vocab_size, device, with_cuda):
     return np.array(loss_values)
 
 
-def model_filter(comments, word_vocab, model, with_cuda=True, query_len=20,num_workers=1,max_iter=1000,dividing_proportion=0):
+def model_filter(comments, word_vocab, model, with_cuda=True, query_len=20,num_workers=1,max_iter=1000,dividing_point=None):
     if not isinstance(comments, list):
         raise TypeError('comments must be a list')
     
@@ -96,16 +96,17 @@ def model_filter(comments, word_vocab, model, with_cuda=True, query_len=20,num_w
     idx = np.argsort(losses)
     losses = np.array(losses)[idx].reshape(-1, 1)
 
-    if dividing_proportion > 0:
-        idx_new = idx[:int(len(idx)*dividing_proportion)]
-        filtered_comments = [comments[i] for i in idx_new]
-    else:
+    if dividing_point is None:
         gmm = GaussianMixture(
             n_components=2, covariance_type='full', max_iter=max_iter).fit(losses)
         predicted = gmm.predict(losses)
         return_type = predicted[np.argmin(losses)]
         idx_new = idx[predicted == return_type]
         idx_new.sort()
-        filtered_comments = [comments[i] for i in idx_new]
+    elif isinstance(dividing_point, int):
+        idx_new = idx[:int(len(idx)*dividing_point)]
+    elif isinstance(dividing_point, function):
+        idx_new = dividing_point(idx,losses)
 
+    filtered_comments = [comments[i] for i in idx_new]
     return filtered_comments, idx_new

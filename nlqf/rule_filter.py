@@ -33,10 +33,10 @@ def end_with_question_mark(s):
 def contain_html_tag(s): 
     return bool(re.search(r'</?[^>]+>', s))
     
-def remove_brackets(s):
+def detach_brackets(s):
     return re.sub(r'\([^\)]*\)','',s)
 
-def remove_html_tag(s):
+def detach_html_tag(s):
     return re.sub(r'</?[^>]+>','',s)
 
 
@@ -48,30 +48,32 @@ rule2fuc = {
     'less_than_three_words':less_than_three_words,
     'end_with_question_mark':end_with_question_mark,
     'contain_html_tag':contain_html_tag,
-    'remove_brackets':remove_brackets,
-    'remove_html_tag':remove_html_tag,
+    'detach_brackets':detach_brackets,
+    'detach_html_tag':detach_html_tag,
 }
 
 
-def rule_filter(comments,rule_set=[],rule_dict={}):
+def rule_filter(comments,selected_rules=[],defined_rule_dict={}):
     if not isinstance(comments, list):
         raise TypeError('comments must be a list')
 
     new_comments = []
     indexs = []
-    rule2fuc.update(rule_dict)
+    rule2fuc.update(defined_rule_dict)
 
-    if len(rule_set) < 1:
-        rule_set = rule2fuc.keys()
+    if len(selected_rules) < 1:
+        selected_rules = list(rule2fuc.keys())
+    rule_set = selected_rules + list(defined_rule_dict.keys())
 
     for i,c in enumerate(comments):
+        print(c)            
         for rule in rule_set:
-            if rule.startswith('remove'):
+            if rule.startswith('detach'):
                 c = rule2fuc[rule](c)
-
+        print(c)
         flag = False
         for rule in rule_set:
-            if not rule.startswith('remove') and rule2fuc[rule](c):
+            if not rule.startswith('detach') and rule2fuc[rule](c):
                 flag = True
                 break
 

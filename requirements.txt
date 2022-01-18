@@ -1,0 +1,6 @@
+nltk==3.6.7
+numpy==1.19.1
+scikit_learn==1.0.2
+setuptools==50.3.0.post20201006
+torch==1.10.1
+tqdm==4.50.2

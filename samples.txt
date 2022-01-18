@@ -1,0 +1,148 @@
+Prints out table header based on the size of the data in columns
+Converts uri parts to valid uri
+Assign parameters to values yielding a new circuit
+returnr a string for an html table
+Retrieve a task handler from the queue
+Convert to human readable version of CLINSIG evaluation
+Existing engine with ident `uid` became unavailable
+Update a Label
+
+        :param label: The data to update
+Waits until all traits are present
+Install everything in this set (after having downloaded and unpacked the packages)
+Parse a FIQL formatted string into an ``Expression``
+Simply checks if data is supported
+Generates python code for alternatives
+Generate a function that will clean and tokenize text
+Returns:
+            bool: Check if the index is empty
+Pushes a new dialog onto the dialog stack
+The Create Job request creates a new job
+Return a textual description of the segment
+Update the paths according to configs
+Parses the dot_code string and replaces the existing model
+Returns HMAC-SHA1 signature as specified at:
+        http://oauth
+convert python slice to value of SLICE hdl type
+Return (sympy expressions, event names and symbols dict) from performance metric str
+Get a list of new album releases featured in Spotify
+Decrypts JWE token with supplied key
+        :param encrypted_token:
+        :param key: A (:class:`jwcrypto
+Decorator for Backend that ensures rates are fresh within last 5 mins
+Construct the point record by reading and decompressing the points data from
+Detect that the given node (AssignName) is inside an
+    exception handler and redefines an import from the tryexcept body
+Calculate the end of mission photometric standard error in the G band as a function
+  of G
+This function gets the URL a file uploaded to this set would be
+        accessed at
+initialize the profile dir
+Add signed metadata statements to a request
+
+        :param req: The request 
+        :param sms_dict: A dictionary with FO IDs as keys and signed metadata
+            statements (sms) or uris pointing to sms as values
+Sets the values to be used in this query
+gate_op : id id_list ';'
+Serializes into a bytestring
+Return a list of data types
+Create a new OpenSSL EC_KEY structure initialized to use this curve
+Returns the concatenation of the dimension in `x` and `other`
+Parses ssh-rsa public keys
+if branch_length mode is not explicitly set, set according to
+        empirical branch length distribution in input tree
+
+        Parameters
+        ----------
+
+         branch_length_mode : str, 'input', 'joint', 'marginal'
+            if the maximal branch length in the tree is longer than 0
+This method only works for extensible fields
+Return all object IDs for the given meteor_ids
+called before visiting project (i
+Start spark and hdfs worker containers
+
+        :param job: The underlying job
+Log response from an API request
+Checks whether a filtered assembly passes a size threshold
+
+    Given a minimum coverage threshold, this function evaluates whether an
+    assembly will pass the minimum threshold of ``genome_size * 1e6 * 0
+Call the disambiguation service in order to disambiguate a search query
+Return exit status
+Factorize s
+remove all annotations from a tier
+
+        :param str id_tier: Name of the tier
+Create an event mapping for a physical interface
+Converts a DOE CODE 
+Add one or more layers to the stack of masking layers
+Return the body of a signed JWT, without verifying the signature
+Searches for all occurrences of `name` under `node`
+Check if is register or wire
+Create a copy of this pen
+Computes the default value for reinterpreted_batch_ndim __init__ arg
+Merge internal hooks set with the given hooks
+C_DigestFinal
+Walk the node and check for identifiers
+Fetch the issues from a project (distribution/package)
+[update table]
+Export the contents of the ConsoleWidget as HTML
+expression : '-' expression %prec negative
+Handle command line arguments, to upload a file to a Luminoso project
+    as a script
+Sends a json GCM message
+Check that the given AssignAttr node
+        is defined in the class slots
+Convert datetime into a unix timestamp
+Helper function to trim and stack a collection of CQT responses
+Build a update query
+Adds an error to the given product's field
+Return the contents of a named file as a list of lines
+Create station stop times for each trip
+Get the arguments given to the template tag element and complete these
+        with the ones from the settings
+Estimate the remaining time left
+Processes batch of utterances and returns corresponding responses batch
+Apply the transformer to the images in "inputCol" and store the transformed result
+return a list of backends installed for the user, which is based on
+       the config file keys found present
+ 
+       Parameters
+       ==========
+       backend: a specific backend to list
+From the input astrometric parameters calculate the phase space coordinates
+Returns a dictionary of all the files under a path
+Must be overridden
+Convert timestamp string to a datetime object
+publish multiple messages in one command (efficiently)
+
+        :param topic: nsq topic
+        :param msg: list of messages bodies (which are bytes)
+        :param callback: function which takes (conn, data) (data may be nsq
+Checks if node represents a string with complex formatting specs
+Checks the given csv file against the json data scraped for the given
+        dict
+In the case of deletions, we pull the change values for the XML request
+    from the ResourceRecordSet
+Return ids or objects in the index that intersect the given
+        coordinates
+Creates authorization headers if the provider supports it
+Generator for the LIST OVERVIEW
+Sets the rotation of this bone on the given entity
+If :data:`provider_name` specified, launches the login procedure for
+        corresponding :doc:`provider </reference/providers>` and returns
+        :class:`
+Handles HTTP GET requests
+Returns (batched) matmul of a SparseTensor (or Tensor) with a Tensor
+Returns True if the user has a gravatar, False if otherwise
+return klass node for a method node (or a staticmethod or a
+This function polls the process until it returns a valid
+    item or returns PROCESS_DEAD_AND_QUEUE_EMPTY if it is in
+    a state where the process has terminated and the queue is empty
+
+    Warning: if the child process is in an infinite loop
+Compress a byte string
+Wrapper for non-picklable object to use cloudpickle to serialize them
+Find data points on the convex hull of a supplied data set
