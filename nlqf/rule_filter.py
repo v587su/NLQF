@@ -66,11 +66,9 @@ def rule_filter(comments,selected_rules=[],defined_rule_dict={}):
     rule_set = selected_rules + list(defined_rule_dict.keys())
 
     for i,c in enumerate(comments):
-        print(c)            
         for rule in rule_set:
             if rule.startswith('detach'):
                 c = rule2fuc[rule](c)
-        print(c)
         flag = False
         for rule in rule_set:
             if not rule.startswith('detach') and rule2fuc[rule](c):
