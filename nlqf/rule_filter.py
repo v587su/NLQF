@@ -66,10 +66,20 @@ def rule_filter(comments,selected_rules=[],defined_rule_dict={}):
     rule_set = selected_rules + list(defined_rule_dict.keys())
 
     for i,c in enumerate(comments):
+        flag = False
         for rule in rule_set:
             if rule.startswith('detach'):
-                c = rule2fuc[rule](c)
-        flag = False
+                result = rule2fuc[rule](c)
+                if result is True:
+                    continue
+                elif result is False:
+                    flag = True
+                    break
+                elif isinstance(result,str):
+                    c = result
+                else:
+                    raise TypeError('Function must return True, False or String')
+
         for rule in rule_set:
             if not rule.startswith('detach') and rule2fuc[rule](c):
                 flag = True

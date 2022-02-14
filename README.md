@@ -21,7 +21,7 @@ pip install -r requirements.txt
 python setup.py install
 ```
 
-Besides, ``nlqf`` should be used with GPU-enabled Pytorch. You can refer to https://pytorch.org/get-started/locally/ to install Pytorch. Pytorch 1.6 is recommended.
+Besides, ``nlqf`` should be used with GPU-enabled Pytorch. You can refer to https://pytorch.org/get-started/locally/ to install Pytorch. Pytorch 1.3 is recommended.
 
 ## Usage
 There are two functional APIs in this library: ``nlqf.rule_filter`` and ``nlqf.model_filter``.
@@ -147,14 +147,14 @@ The first-level structure of the decompressed project is as follows:
 ```
 The project requires Python3.6.9 and the following packages:
 ```
-jsonlines==1.2.0
-pandas==0.24.1
-nlqf==0.1.10
+jsonlines
+pandas
+nlqf==0.1.12
 javalang==0.12.0
-nltk==3.3
+nltk
 torch==1.3.1
-numpy==1.18.3
-tqdm==4.62.3
+numpy
+tqdm
 tables==3.4.3
 ```
 You can install them by the following command:
