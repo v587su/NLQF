@@ -13,21 +13,20 @@ We have uploaded ``NLQF`` to Python Package Index (PyPi) and you can install it 
 pip install nlqf
 ```
 
-The source code of ``NLQF`` is available at https://github.com/v587su/NLQF.
-You can also download the source code from the above link and install it directly with the following command:
+You can also clone this repo and install directly with the following command:
 
 ```
 pip install -r requirements.txt
 python setup.py install
 ```
 
-Besides, ``nlqf`` should be used with GPU-enabled Pytorch. You can refer to https://pytorch.org/get-started/locally/ to install Pytorch. Pytorch 1.3 is recommended.
+Besides, ``NLQF`` should be used with GPU-enabled Pytorch. You can refer to https://pytorch.org/get-started/locally/ to install Pytorch. Pytorch 1.3 is required (Pytorch 1.3 does not support Python 3.8+).
 
 ## Usage
 There are two functional APIs in this library: ``nlqf.rule_filter`` and ``nlqf.model_filter``.
 The input of each filter is a list of comment strings and the output is a list of retained comments and a list of the index of the retained comments.
 
-It is noteworthy that, to use the ``model_filter``, you need to download the pre-trained model ``./resource/vae.model`` and the word vocabulary ``./resource/word_vocab.json`` form https://github.com/v587su/NLQF.
+It is noteworthy that, to use the ``model_filter``, you need to download the pre-trained model ``./resource/vae.model`` and the word vocabulary ``./resource/word_vocab.json`` form this repo.
 
 Here is the example script to use ``nlqf``:
 ```
@@ -145,11 +144,11 @@ The first-level structure of the decompressed project is as follows:
 - utils.py              # utility functions for DeepCS
 - requirements.txt      # the requirements of this project
 ```
-The project requires Python3.6.9 and the following packages:
+The project requires Python3.6 and the following packages:
 ```
 jsonlines
 pandas
-nlqf==0.1.12
+nlqf==0.1.13
 javalang==0.12.0
 nltk
 torch==1.3.1
@@ -197,8 +196,3 @@ python repr_code.py --reload_from 100
 
 The evaluation results will be printed in the terminal. 
 It should be 0.541 MRR and 344 Hit@10.
-
-
-### VAE Model 
-To train the filtering model with your own query corpus, you can refer to [this repo](https://github.com/v587su/VAE_public).
-

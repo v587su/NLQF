@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="nlqf",
-    version="0.1.12",
+    version="0.1.13",
     author="Zhensu Sun",
     author_email="zhensuuu@gmail.com",
     description="A tool for fittering code comments",

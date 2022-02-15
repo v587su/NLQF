@@ -10,6 +10,7 @@ from torch.utils.data import Dataset
 from sklearn.mixture import GaussianMixture
 import nltk
 nltk.download('wordnet')
+nltk.download('omw-1.4')
 from nltk.stem import WordNetLemmatizer 
 from model import *
 
